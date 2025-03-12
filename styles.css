@@ -1,13 +1,28 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  button {
-    font-size: 2rem;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+button {
+  font-size: 1rem;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+input {
+  font-size: 1rem;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+#responseContainer {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
