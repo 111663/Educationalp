@@ -38,3 +38,58 @@ chatSendBtn.addEventListener('click', async () => {
   const result = await OllamaReq({ prompt });
   chatResponse.innerHTML = result.response || "No response returned.";
 });
+import { useState } from "react";
+
+const FileUploader = () => {
+  const [fileName, setFileName] = useState(null);
+  const [fileContent, setFileContent] = useState(null);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setFileName(file.name);
+    console.log(`File selected: ${file.name}`);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target.result;
+      setFileContent(content);
+      console.log("File successfully loaded.");
+    };
+
+    try {
+      if (file.type === "text/plain" || file.type === "text/markdown") {
+        reader.readAsText(file);
+      } else if (file.type === "application/pdf") {
+        const formData = new FormData();
+        formData.append("file", file);
+        console.log("PDF file prepared for server-side processing.");
+      } else {
+        console.error("Unsupported file type.");
+      }
+    } catch (error) {
+      console.error("Error reading file:", error);
+    }
+  };
+
+  const clearFile = () => {
+    setFileName(null);
+    setFileContent(null);
+    console.log("File selection cleared.");
+  };
+
+  return (
+    <div className="file-uploader">
+      <input type="file" onChange={handleFileChange} />
+      {fileName && (
+        <div>
+          <p>Uploaded File: {fileName}</p>
+          <button onClick={clearFile}>Clear File</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default FileUploader;
